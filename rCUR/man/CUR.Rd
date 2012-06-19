@@ -51,7 +51,12 @@ The function produces an object of \link{CURobj-class}.
 \references{
 Mahoney M. W. and Drineas P. (2009) CUR matrix decompositions for improved data analysis. PNAS, 106(3):697-702
 
-The development was initially based ont the Matlab code of Christos Boutsidis:\cr
+Andras Bodor, Istvan Csabai, Michael W Mahoney and Norbert Solymosi
+rCUR:an R package for CUR matrix decomposition
+BMC Bioinformatics 2012, 13:103 
+doi:10.1186/1471-2105-13-103
+
+The development was initially based on the Matlab code of Christos Boutsidis:\cr
 http://www.cs.rpi.edu/~boutsc/files/AlgorithmCUR.m
 }
 

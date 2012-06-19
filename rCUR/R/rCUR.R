@@ -80,9 +80,11 @@ CUR <- function(A, c=dim(A)[2], r=dim(A)[1], k=NULL, sv=NULL,
       {
         IndC[i]=which.max(pi+alpha*sqrt(vortnormsqr/vnormsqr))   #The next column is selected
         sn = vortnormsqr[IndC[i]]    # sn = <v_S|v_S>
-        delta = (vort[,IndC[i]] %*% vort);    #Scalar product of the selected vector with all of the vectors: <v_i|v_S>
-        vort = vort - vort[,IndC[i]] %*% delta /sn    #The part, parallel with the new vector is substracted: v_i -> v_i-<v_i|v_S>*v_S/<v_S|v_S>
-        vortnormsqr = pmax(vortnormsqr-delta^2/sn,0)    #The norm square is adjusted accordingly: <v_i|v_i> -> <v_i|v_i>-<v_i|v_S>^2/<v_S|v_S>. Rounding errors may set vortnormsqr negative, pmax mitigates this.
+        if (sn>0) {
+          delta = (vort[,IndC[i]] %*% vort);    #Scalar product of the selected vector with all of the vectors: <v_i|v_S>
+          vort = vort - vort[,IndC[i]] %*% delta /sn    #The part, parallel with the new vector is substracted: v_i -> v_i-<v_i|v_S>*v_S/<v_S|v_S>
+          vortnormsqr = pmax(vortnormsqr-delta^2/sn,0)    #The norm square is adjusted accordingly: <v_i|v_i> -> <v_i|v_i>-<v_i|v_S>^2/<v_S|v_S>. Rounding errors may set vortnormsqr negative, pmax mitigates this.
+        } #(sn>0)
         pi[IndC[i]] = 0   #To avoid being selected again.
       }
     } # c<n
@@ -100,9 +102,11 @@ CUR <- function(A, c=dim(A)[2], r=dim(A)[1], k=NULL, sv=NULL,
       {
         IndR[i]=which.max(pi+alpha*sqrt(vortnormsqr/vnormsqr))
         sn = vortnormsqr[IndR[i]]
-        delta = (vort %*% vort[IndR[i],]);
-        vort = vort - delta %*% vort[IndR[i],] /sn
-        vortnormsqr = pmax(vortnormsqr-delta^2/sn,0)
+        if (sn>0) {
+          delta = (vort %*% vort[IndR[i],]);
+          vort = vort - delta %*% vort[IndR[i],] /sn
+          vortnormsqr = pmax(vortnormsqr-delta^2/sn,0)
+        } #(sn>0)
         pi[IndR[i]] = 0 #To avoid being selected again.
       }
     } #r<m
