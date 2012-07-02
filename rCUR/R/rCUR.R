@@ -26,7 +26,7 @@ CUR <- function(A, c=dim(A)[2], r=dim(A)[1], k=NULL, sv=NULL,
     if (k==1) {
       v[,1]^2
     } else {
-      if (weighted) {qq<-sv$d[1:k]^beta; apply(apply(v[,1:k]^2,1,function(x) x*qq),2,sum)} else apply(v[,1:k]^2,1,sum)
+      if (weighted) {qq<-sv$d[1:k]^beta; scores=apply(apply(v[,1:k]^2,1,function(x) x*qq),2,sum); scores/sum(scores)} else apply(v[,1:k]^2,1,sum)/k
     }
   }
 

@@ -1,7 +1,7 @@
 Package: rCUR
 Type: Package
 Title: CUR decomposition package
-Version: 1.2
+Version: 1.3
 Date: 2012-03-06
 Author: Andras Bodor, Norbert Solymosi
 Maintainer: Andras Bodor <bodri.mh3@gmail.com>
